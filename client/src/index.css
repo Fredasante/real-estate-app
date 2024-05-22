@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.no-outline {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.no-outline:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}

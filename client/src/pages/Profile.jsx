@@ -1,4 +1,4 @@
-import { Alert, Button, Spinner, TextInput } from "flowbite-react";
+import { Alert, Button, Modal, Spinner, TextInput } from "flowbite-react";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -15,8 +15,11 @@ import {
   UpdateFailure,
   UpdateStart,
   UpdateSuccess,
+  DeleteUserStart,
+  DeleteUserSuccess,
+  DeleteUserFailure,
 } from "../redux/user/userSlice";
-import { set } from "mongoose";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 const Profile = () => {
   const [imageFile, setImageFile] = useState(null);
@@ -26,6 +29,7 @@ const Profile = () => {
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [updateUserError, setUpdateUserError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({});
 
   const fileRef = useRef(null);
@@ -121,6 +125,23 @@ const Profile = () => {
     }
   };
 
+  const handleDeleteUser = async () => {
+    try {
+      dispatch(DeleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (res.ok) {
+        dispatch(DeleteUserSuccess());
+        console.log("User has been deleted!");
+      }
+    } catch (error) {
+      console.log(error.message);
+      dispatch(DeleteUserFailure(error.message));
+    }
+  };
+
   return (
     <div className="max-w-lg mx-auto w-full mb-10">
       <h1 className="my-7 text-center font-semibold text-3xl">Profile</h1>
@@ -213,7 +234,12 @@ const Profile = () => {
         </Link>
       </form>
       <div className="flex justify-between mt-5 p-3 md:p-0">
-        <span className="text-red-500 cursor-pointer">Delete Account?</span>
+        <span
+          onClick={() => setShowModal(true)}
+          className="text-red-500 cursor-pointer"
+        >
+          Delete Account?
+        </span>
         <span className="text-teal-500 cursor-pointer">Sign Out</span>
       </div>
       {updateUserError && (
@@ -231,6 +257,31 @@ const Profile = () => {
           {error}
         </Alert>
       )}
+
+      <Modal
+        show={showModal}
+        size="md"
+        onClose={() => setShowModal(false)}
+        popup
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Are you sure you want to delete your account?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button color="failure" onClick={handleDeleteUser}>
+                {"Yes, I'm sure"}
+              </Button>
+              <Button color="gray" onClick={() => setShowModal(false)}>
+                No, cancel
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

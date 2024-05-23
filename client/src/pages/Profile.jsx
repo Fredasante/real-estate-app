@@ -1,7 +1,7 @@
 import { Alert, Button, Modal, Spinner, TextInput } from "flowbite-react";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   getDownloadURL,
   getStorage,
@@ -18,6 +18,9 @@ import {
   DeleteUserStart,
   DeleteUserSuccess,
   DeleteUserFailure,
+  SignOutStart,
+  SignOutSuccess,
+  SignOutFailure,
 } from "../redux/user/userSlice";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
@@ -34,6 +37,7 @@ const Profile = () => {
 
   const fileRef = useRef(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { currentUser, error, loading } = useSelector((state) => state.user);
 
   // firebase storage
@@ -142,6 +146,21 @@ const Profile = () => {
     }
   };
 
+  const handleSignOut = async () => {
+    try {
+      dispatch(SignOutStart());
+      const res = await fetch("/api/auth/signout");
+      const data = await res.json();
+
+      if (res.ok) {
+        dispatch(SignOutSuccess());
+        navigate("/sign-in");
+      }
+    } catch (error) {
+      dispatch(SignOutFailure(error.message));
+    }
+  };
+
   return (
     <div className="max-w-lg mx-auto w-full mb-10">
       <h1 className="my-7 text-center font-semibold text-3xl">Profile</h1>
@@ -240,7 +259,9 @@ const Profile = () => {
         >
           Delete Account?
         </span>
-        <span className="text-teal-500 cursor-pointer">Sign Out</span>
+        <span onClick={handleSignOut} className="text-teal-500 cursor-pointer">
+          Sign Out
+        </span>
       </div>
       {updateUserError && (
         <Alert className="mt-4" color="failure">

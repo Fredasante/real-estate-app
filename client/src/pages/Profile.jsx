@@ -246,7 +246,7 @@ const Profile = () => {
             "UPDATE"
           )}
         </Button>
-        <Link to="/create-post">
+        <Link to="/create-listing">
           <Button className="w-full" outline type="button">
             CREATE LISTING
           </Button>

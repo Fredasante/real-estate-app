@@ -123,7 +123,7 @@ const CreateListing = () => {
       e.target.type === "text" ||
       e.target.type === "textarea"
     ) {
-      setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+      setFormData({ ...formData, [e.target.id]: e.target.value });
     }
   };
 
@@ -157,7 +157,7 @@ const CreateListing = () => {
       }
       if (res.ok) {
         setLoading(false);
-        navigate(`/listing${data._id}`);
+        navigate(`/listing/${data._id}`);
       }
     } catch (error) {
       setError(error.message);
@@ -385,8 +385,12 @@ const CreateListing = () => {
               ))}
             </div>
           )}
-          <Button type="sumbit" className="my-7">
-            {loading || uploading ? (
+          <Button
+            type="sumbit"
+            className="my-7"
+            disabled={loading || uploading}
+          >
+            {loading ? (
               <>
                 <Spinner size="sm" />
                 <span className="ml-2">Loading...</span>

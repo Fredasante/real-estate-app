@@ -86,6 +86,11 @@ const Header = () => {
             <Link to="/create-listing">Create Listing</Link>
           </Navbar.Link>
         )}
+        {currentUser && (
+          <Navbar.Link active={path === "/listings"} as={"div"}>
+            <Link to="/listings">Listings</Link>
+          </Navbar.Link>
+        )}
         <Navbar.Link
           className="md:hidden lg:flex"
           active={path === "/learn"}

@@ -8,6 +8,7 @@ const Listings = () => {
   const [showModal, setShowModal] = useState(false);
   const [listings, setListings] = useState([]);
   const [loading, setloading] = useState(false);
+  const [listingIdToDelete, setListingIdToDelete] = useState("");
   const { currentUser } = useSelector((state) => state.user);
 
   const getListings = async () => {
@@ -29,6 +30,21 @@ const Listings = () => {
   useEffect(() => {
     getListings();
   }, []);
+
+  const handleDeleteListing = async () => {
+    setShowModal(false);
+    try {
+      const res = await fetch(`/api/listing/delete/${listingIdToDelete}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setListings((prevListings) =>
+          prevListings.filter((listing) => listing._id !== listingIdToDelete)
+        );
+      }
+    } catch (error) {}
+  };
 
   console.log(listings);
 
@@ -89,6 +105,7 @@ const Listings = () => {
                     <Table.Cell>
                       <span
                         onClick={() => {
+                          setListingIdToDelete(listing._id);
                           setShowModal(true);
                         }}
                         className="font-medium text-red-500 hover:underline cursor-pointer"
@@ -113,15 +130,6 @@ const Listings = () => {
           {listings.length === 0 && (
             <div className="my-7 text-center w-full">No Listings Found!</div>
           )}
-          {/* {showMore && (
-          <button
-            onClick={handleShowMore}
-            className="self-center w-full my-7 text-teal-500"
-          >
-            Show More
-            <FaAngleDown className="inline-block ml-1 text-xl" />
-          </button>
-        )} */}
         </>
         <Modal
           show={showModal}
@@ -137,7 +145,9 @@ const Listings = () => {
                 Are you sure you want to delete this listing?
               </h3>
               <div className="flex justify-center gap-4">
-                <Button color="failure">{"Yes, I'm sure"}</Button>
+                <Button onClick={handleDeleteListing} color="failure">
+                  {"Yes, I'm sure"}
+                </Button>
                 <Button color="gray" onClick={() => setShowModal(false)}>
                   No, cancel
                 </Button>

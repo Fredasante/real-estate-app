@@ -1,12 +1,34 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import { AiOutlineSearch } from "react-icons/ai";
 import Logo from "./Logo";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  SignOutFailure,
+  SignOutStart,
+  SignOutSuccess,
+} from "../redux/user/userSlice";
 
 const Header = () => {
   const path = useLocation().pathname;
   const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleSignOut = async () => {
+    try {
+      dispatch(SignOutStart());
+      const res = await fetch("/api/auth/signout");
+      const data = await res.json();
+
+      if (res.ok) {
+        dispatch(SignOutSuccess());
+        navigate("/sign-in");
+      }
+    } catch (error) {
+      dispatch(SignOutFailure(error.message));
+    }
+  };
 
   return (
     <Navbar className="shadow-sm">
@@ -36,7 +58,7 @@ const Header = () => {
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
             <Dropdown.Divider />
-            <Dropdown.Item>Sign Out</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignOut}>Sign Out</Dropdown.Item>
           </Dropdown>
         ) : (
           <>
@@ -49,13 +71,26 @@ const Header = () => {
       </div>
 
       <Navbar.Collapse>
-        <Navbar.Link active={path === "/"} as={"div"}>
+        <Navbar.Link
+          className="md:hidden lg:flex"
+          active={path === "/"}
+          as={"div"}
+        >
           <Link to="/">Home</Link>
         </Navbar.Link>
         <Navbar.Link active={path === "/about"} as={"div"}>
           <Link to="/about">About</Link>
         </Navbar.Link>
-        <Navbar.Link active={path === "/learn"} as={"div"}>
+        {currentUser && (
+          <Navbar.Link active={path === "/create-listing"} as={"div"}>
+            <Link to="/create-listing">Create Listing</Link>
+          </Navbar.Link>
+        )}
+        <Navbar.Link
+          className="md:hidden lg:flex"
+          active={path === "/learn"}
+          as={"div"}
+        >
           <Link to="/learn">Learn More</Link>
         </Navbar.Link>
       </Navbar.Collapse>

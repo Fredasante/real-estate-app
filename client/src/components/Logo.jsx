@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../../public/vite.svg";
+import logo from "/vite.svg";
 
 const Logo = () => {
   return (

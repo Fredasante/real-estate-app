@@ -115,7 +115,7 @@ const Listings = () => {
                     </Table.Cell>
                     <Table.Cell>
                       <Link
-                        to={`/update-listing/${listing._id}`}
+                        to={`/edit-listing/${listing._id}`}
                         className="text-teal-500"
                       >
                         <span className="font-medium hover:underline text-teal-500 cursor-pointer">

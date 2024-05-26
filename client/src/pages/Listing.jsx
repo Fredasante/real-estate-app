@@ -1,4 +1,4 @@
-import { Card, Carousel, Spinner } from "flowbite-react";
+import { Button, Card, Carousel, Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -8,11 +8,15 @@ import {
   FaMapMarkerAlt,
   FaParking,
 } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import ContactLandlord from "../components/ContactLandlord";
 
 const Listing = () => {
   const { listingId } = useParams();
   const [listing, setListing] = useState({});
   const [loading, setLoading] = useState(false);
+  const [contact, setContact] = useState(false);
+  const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -33,7 +37,6 @@ const Listing = () => {
     fetchListing();
   }, [listingId]);
 
-  console.log(listing);
   return (
     <main className="my-7">
       {loading && (
@@ -44,14 +47,14 @@ const Listing = () => {
       {listing && (
         <div className="p-5">
           <div className="h-56 sm:h-64 xl:h-[400px] 2xl:h-[500px]">
-            <Carousel slide={false}>
+            <Carousel className="max-w-screen-lg mx-auto" slide={false}>
               {listing.imageUrls &&
                 listing.imageUrls.map((item) => (
                   <img key={item} src={item} alt="Listing" />
                 ))}
             </Carousel>
           </div>
-          <div className="max-w-4xl mx-auto mt-10">
+          <div className="max-w-screen-lg  mx-auto mt-10">
             <Card className="max-w-md my-5">
               <div className="flex items-baseline justify-between">
                 <h5 className="text-xl font-semibold tracking-tight text-gray-900">
@@ -75,11 +78,11 @@ const Listing = () => {
                 {listing.address}
               </p>
               <div className="flex gap-4">
-                <p className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+                <p className="bg-red-800 w-full max-w-[200px] text-white text-center p-1 rounded-md">
                   {listing.type === "rent" ? "For Rent" : "For Sale"}
                 </p>
                 {listing.offer && (
-                  <p className="bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+                  <p className="bg-green-800 w-full max-w-[200px] text-white text-center p-1 rounded-md">
                     GH₵{+listing.regularPrice - +listing.discountPrice} OFF
                   </p>
                 )}
@@ -113,6 +116,16 @@ const Listing = () => {
                 {listing.furnished ? "Furnished" : "Unfurnished"}
               </li>
             </ul>
+            {currentUser && !contact && listing.userRef === currentUser._id && (
+              <Button
+                onClick={() => setContact(true)}
+                className="w-full my-7"
+                color="dark"
+              >
+                CONTACT LANDLORD
+              </Button>
+            )}
+            {contact && <ContactLandlord listing={listing} />}
           </div>
         </div>
       )}

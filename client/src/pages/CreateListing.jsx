@@ -364,12 +364,12 @@ const CreateListing = () => {
           {formData.imageUrls.length > 0 && (
             <div className="flex flex-col gap-4 mt-4">
               {formData.imageUrls.map((url, index) => (
-                <div className="flex" key={url}>
+                <div className="flex w-full" key={url}>
                   <img
                     key={index}
                     src={url}
                     alt="Listing Image"
-                    className="w-[120px] h-[60px] object-cover rounded-md mr-auto"
+                    className="w-20 h-20 object-cover rounded-md mr-auto"
                   />
                   <div className="flex items-center gap-2">
                     <Button

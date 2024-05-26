@@ -63,7 +63,7 @@ const Listing = () => {
                 <div className="flex items-baseline text-gray-900 dark:text-white">
                   <span className="text-xl font-semibold">GH₵</span>
                   <span className="text-3xl font-bold tracking-tight">
-                    {listing.discountPrice}
+                    {listing.regularPrice}
                   </span>
                   {listing.type === "rent" && (
                     <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">

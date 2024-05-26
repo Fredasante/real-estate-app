@@ -1,6 +1,13 @@
-import { Carousel, Spinner } from "flowbite-react";
+import { Card, Carousel, Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import {
+  FaBath,
+  FaBed,
+  FaChair,
+  FaMapMarkerAlt,
+  FaParking,
+} from "react-icons/fa";
 
 const Listing = () => {
   const { listingId } = useParams();
@@ -28,20 +35,87 @@ const Listing = () => {
 
   console.log(listing);
   return (
-    <main>
+    <main className="my-7">
       {loading && (
-        <div className="flex items-center justify-center min-h-[30vh]">
+        <div className="flex items-center justify-center min-h-[40vh]">
           <Spinner />
         </div>
       )}
-      <div className="h-56 sm:h-64 xl:h-96 2xl:h-[500px">
-        <Carousel slide={false}>
-          {listing.imageUrls &&
-            listing.imageUrls.map((item) => (
-              <img key={item} src={item} alt="Listing" />
-            ))}
-        </Carousel>
-      </div>
+      {listing && (
+        <div className="p-5">
+          <div className="h-56 sm:h-64 xl:h-[400px] 2xl:h-[500px]">
+            <Carousel slide={false}>
+              {listing.imageUrls &&
+                listing.imageUrls.map((item) => (
+                  <img key={item} src={item} alt="Listing" />
+                ))}
+            </Carousel>
+          </div>
+          <div className="max-w-4xl mx-auto mt-10">
+            <Card className="max-w-md my-5">
+              <div className="flex items-baseline justify-between">
+                <h5 className="text-xl font-semibold tracking-tight text-gray-900">
+                  {listing.name}
+                </h5>
+                <div className="flex items-baseline text-gray-900 dark:text-white">
+                  <span className="text-xl font-semibold">GH₵</span>
+                  <span className="text-3xl font-bold tracking-tight">
+                    {listing.discountPrice}
+                  </span>
+                  {listing.type === "rent" && (
+                    <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
+                      /month
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <p className="my-3 flex items-center gap-1 text-slate-600 text-sm">
+                <FaMapMarkerAlt className="text-green-700" />
+                {listing.address}
+              </p>
+              <div className="flex gap-4">
+                <p className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+                  {listing.type === "rent" ? "For Rent" : "For Sale"}
+                </p>
+                {listing.offer && (
+                  <p className="bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+                    GH₵{+listing.regularPrice - +listing.discountPrice} OFF
+                  </p>
+                )}
+              </div>
+            </Card>
+
+            <p className="text-slate-800">
+              <span className="font-semibold text-black">Description - </span>
+              {listing.description}
+            </p>
+
+            <ul className="mt-5 text-slate-800 font-semibold text-sm flex flex-wrap items-center gap-5 sm:gap-6">
+              <li className="flex items-center gap-1 whitespace-nowrap ">
+                <FaBed className="text-lg" />
+                {listing.bedrooms > 1
+                  ? `${listing.bedrooms} beds `
+                  : `${listing.bedrooms} bed `}
+              </li>
+              <li className="flex items-center gap-1 whitespace-nowrap ">
+                <FaBath className="text-lg" />
+                {listing.bathrooms > 1
+                  ? `${listing.bathrooms} baths `
+                  : `${listing.bathrooms} bath `}
+              </li>
+              <li className="flex items-center gap-1 whitespace-nowrap ">
+                <FaParking className="text-lg" />
+                {listing.parking ? "Parking spot" : "No Parking"}
+              </li>
+              <li className="flex items-center gap-1 whitespace-nowrap ">
+                <FaChair className="text-lg" />
+                {listing.furnished ? "Furnished" : "Unfurnished"}
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
     </main>
   );
 };

@@ -8,12 +8,31 @@ import {
   SignOutStart,
   SignOutSuccess,
 } from "../redux/user/userSlice";
+import { useEffect, useState } from "react";
 
 const Header = () => {
-  const path = useLocation().pathname;
+  const [searchTerm, setSearchTerm] = useState("");
+
   const { currentUser } = useSelector((state) => state.user);
+  const path = useLocation().pathname;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("searchTerm", searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
 
   const handleSignOut = async () => {
     try {
@@ -34,11 +53,13 @@ const Header = () => {
     <Navbar className="shadow-sm">
       <Logo />
 
-      <form className="hidden md:flex">
+      <form onSubmit={handleSubmit} className="hidden md:flex">
         <TextInput
           type="text"
           placeholder="Search"
           rightIcon={AiOutlineSearch}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchTerm}
         />
       </form>
       <div className="flex gap-2 md:order-2">

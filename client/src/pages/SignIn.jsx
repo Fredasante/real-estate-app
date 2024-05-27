@@ -34,12 +34,12 @@ const SignIn = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      dispatch(SignInSuccess(data));
 
       if (!res.ok) {
         dispatch(SignInFailure(data.message));
       }
       if (res.ok) {
+        dispatch(SignInSuccess(data));
         navigate("/");
       }
     } catch (error) {

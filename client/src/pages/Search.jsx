@@ -6,7 +6,6 @@ import {
   Spinner,
   TextInput,
 } from "flowbite-react";
-import { set } from "mongoose";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListingCard from "../components/ListingCard";
@@ -23,6 +22,7 @@ const Search = () => {
   });
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showMore, setShowMore] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,17 +49,21 @@ const Search = () => {
 
     const fetchListings = async () => {
       setLoading(true);
+      setShowMore(false);
       const searchQuery = urlParams.toString();
       const res = await fetch(`/api/listing/get?${searchQuery}`);
       const data = await res.json();
       setListings(data);
+      if (data.length > 8) {
+        setShowMore(true);
+      } else {
+        setShowMore(false);
+      }
       setLoading(false);
     };
 
     fetchListings();
   }, [location.search]);
-
-  console.log(listings);
 
   const handleChange = (e) => {
     if (
@@ -104,11 +108,25 @@ const Search = () => {
     navigate(url);
   };
 
+  const onShowMoreClick = async () => {
+    const numberOfListings = listings.length;
+    const startIndex = numberOfListings;
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set("startIndex", startIndex);
+    const searchQuery = urlParams.toString();
+    const res = await fetch(`/api/listing/get?${searchQuery}`);
+    const data = await res.json();
+    if (data.length < 9) {
+      setShowMore(false);
+    }
+    setListings([...listings, ...data]);
+  };
+
   return (
-    <div className="flex flex-col md:flex-row max-w-screen-xl mx-auto p-5 my-7 w-full gap-10 lg:gap-14">
+    <div className="flex flex-col md:flex-row max-w-screen-2xl mx-auto p-5 my-7 w-full gap-10 lg:gap-14">
       <div className="max-w-xs border-b-2 md:border-r-2 pb-5 md:min-h-screen md:px-3 px-1">
-        <form onSubmit={handleSubmit}>
-          <div className="flex items-center gap-3">
+        <form onSubmit={handleSubmit} className="min-w-[300px]">
+          <div className="flex items-center gap-3 whitespace-nowrap">
             <p className="font-semibold">Search Term:</p>
             <TextInput
               value={sidebardata.searchTerm}
@@ -222,6 +240,13 @@ const Search = () => {
               <ListingCard key={listing._id} listing={listing} />
             ))}
         </div>
+        {showMore && (
+          <div className="flex justify-center my-7">
+            <Button outline onClick={onShowMoreClick}>
+              Show More
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

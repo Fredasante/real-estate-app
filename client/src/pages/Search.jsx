@@ -1,7 +1,15 @@
-import { Button, Checkbox, Label, Select, TextInput } from "flowbite-react";
+import {
+  Button,
+  Checkbox,
+  Label,
+  Select,
+  Spinner,
+  TextInput,
+} from "flowbite-react";
 import { set } from "mongoose";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ListingCard from "../components/ListingCard";
 
 const Search = () => {
   const [sidebardata, setSidebardata] = useState({
@@ -194,7 +202,27 @@ const Search = () => {
         </form>
       </div>
 
-      <div className="text-2xl font-semibold">Listing Results:</div>
+      <div className="">
+        <h1 className="text-2xl font-semibold  mb-6">Listing Results:</h1>
+
+        {loading && (
+          <div className="flex items-center justify-center min-h-[40vh]">
+            <Spinner />
+          </div>
+        )}
+
+        {!loading && listings.length === 0 && (
+          <p className="text-lg text-slate-700">No listings found.</p>
+        )}
+
+        <div className="flex flex-wrap gap-8">
+          {!loading &&
+            listings &&
+            listings.map((listing) => (
+              <ListingCard key={listing._id} listing={listing} />
+            ))}
+        </div>
+      </div>
     </div>
   );
 };

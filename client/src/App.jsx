@@ -11,6 +11,7 @@ import Listings from "./pages/Listings";
 import UpdateListing from "./pages/UpdateListing";
 import Listing from "./pages/Listing";
 import Learn from "./pages/Learn";
+import Search from "./pages/Search";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/about" element={<About />} />
         <Route path="/learn" element={<Learn />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/listing/:listingId" element={<Listing />} />
 
         <Route element={<PrivateRoute />}>

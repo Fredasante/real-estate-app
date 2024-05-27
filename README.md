@@ -43,8 +43,7 @@ This is a full-stack real estate marketplace application built with the MERN sta
 ```markdown
 1. Open your browser and go to `http://localhost:3000`.
 2. Register a new account or log in with an existing account.
-3. Create, edit, and delete blog posts.
-4. Toggle between light and dark modes using the button in the header.
+3. Create, edit, and delete listings.
 ```
 
 4. ### Contributions

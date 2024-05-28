@@ -107,11 +107,11 @@ const UpdateListing = () => {
     });
   };
 
-  const handleDeleteImage = (index) => () => {
-    setFormData({
-      ...formData,
-      imageUrls: formData.imageUrls.filter((_, i) => i !== index),
-    });
+  const handleDeleteImage = (index) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      imageUrls: prevFormData.imageUrls.filter((_, i) => i !== index),
+    }));
   };
 
   const handleChange = (e) => {
@@ -214,6 +214,7 @@ const UpdateListing = () => {
               required
               onChange={handleChange}
               value={formData.description}
+              rows={6}
             />
           </div>
           <div>
@@ -392,7 +393,7 @@ const UpdateListing = () => {
                       onClick={() => handleDeleteImage(index)}
                       type="button"
                       color="failure"
-                      size="sm"
+                      size="xs"
                     >
                       DELETE
                     </Button>

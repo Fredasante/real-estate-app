@@ -94,11 +94,11 @@ const CreateListing = () => {
     });
   };
 
-  const handleDeleteImage = (index) => () => {
-    setFormData({
-      ...formData,
-      imageUrls: formData.imageUrls.filter((_, i) => i !== index),
-    });
+  const handleDeleteImage = (index) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      imageUrls: prevFormData.imageUrls.filter((_, i) => i !== index),
+    }));
   };
 
   const handleChange = (e) => {
@@ -165,8 +165,8 @@ const CreateListing = () => {
   };
 
   return (
-    <main className="max-w-screen-xl xl:min-h-[100vh] md:pb-10 mx-auto p-5 bg-gray-100">
-      <h1 className="text-center font-semibold text-xl lg:text-3xl my-3 lg:my-6">
+    <main className="max-w-screen-xl xl:min-h-[89vh] md:pb-10 mx-auto p-5 bg-gray-100 md:m-5 my-5 lg:my-10 rounded">
+      <h1 className="text-center font-semibold text-xl lg:text-3xl my-3 lg:my-7">
         Create a Listing
       </h1>
 
@@ -198,6 +198,7 @@ const CreateListing = () => {
               required
               onChange={handleChange}
               value={formData.description}
+              rows={6}
             />
           </div>
           <div>
@@ -376,7 +377,7 @@ const CreateListing = () => {
                       onClick={() => handleDeleteImage(index)}
                       type="button"
                       color="failure"
-                      size="sm"
+                      size="xs"
                     >
                       DELETE
                     </Button>

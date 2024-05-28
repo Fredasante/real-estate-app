@@ -10,7 +10,7 @@ const Learn = () => {
           <p className="mt-2 text-4xl leading-10 font-extrabold tracking-tight text-slate-700 sm:text-4xl">
             Welcome to Property Pro
           </p>
-          <p className="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+          <p className="mt-4 max-w-2xl text-lg text-gray-600 mx-auto">
             Follow this guide to get started and make the most out of our
             platform.
           </p>
@@ -18,14 +18,14 @@ const Learn = () => {
 
         <div className="mt-12 space-y-16">
           <section>
-            <h3 className="text-3xl font-bold text-slate-700">
+            <h3 className="text-2xl font-bold text-slate-700">
               1. Sign Up or Log In
             </h3>
             <div className="mt-4 text-lg text-slate-700">
               <p>
                 <strong>Create an Account:</strong>
               </p>
-              <ul className="list-disc list-inside mt-2">
+              <ul className="list-disc list-inside mt-2 text-base">
                 <li>
                   Visit our{" "}
                   <Link
@@ -40,12 +40,12 @@ const Learn = () => {
                   Fill in your personal details, such as your name, email, and
                   password.
                 </li>
-                <li>Your Account is now successfully created.</li>
+                <li>Your account is now successfully created.</li>
               </ul>
               <p className="mt-4">
                 <strong>Log In:</strong>
               </p>
-              <ul className="list-disc list-inside mt-2">
+              <ul className="list-disc list-inside mt-2 text-base">
                 <li>
                   Go to the{" "}
                   <Link
@@ -65,14 +65,14 @@ const Learn = () => {
           </section>
 
           <section>
-            <h3 className="text-3xl font-bold text-slate-700">
+            <h3 className="text-2xl font-bold text-slate-700">
               2. Complete Your Profile
             </h3>
-            <div className="mt-4 text-lg text-slate-700">
+            <div className="mt-4 text-lg text-slate-700 ">
               <p>
                 <strong>Profile Information:</strong>
               </p>
-              <ul className="list-disc list-inside mt-2">
+              <ul className="list-disc list-inside mt-2 text-base">
                 <li>Navigate to your profile settings once logged in.</li>
                 <li>
                   Fill in additional information such as your phone number and
@@ -86,20 +86,19 @@ const Learn = () => {
           </section>
 
           <section>
-            <h3 className="text-3xl font-bold text-slate-700">
+            <h3 className="text-2xl font-bold text-slate-700">
               3. Explore Listings
             </h3>
             <div className="mt-4 text-lg text-slate-700">
               <p>
                 <strong>Browse Properties:</strong>
               </p>
-              <ul className="list-disc list-inside mt-2">
+              <ul className="list-disc list-inside mt-2 text-base">
                 <li>
                   Use the search bar on the homepage to look for properties.
                 </li>
                 <li>
-                  Apply filters such as location, property type, price range,
-                  and more.
+                  Apply filters such as property type, amenities, sort and more.
                 </li>
                 <li>
                   View property details, including photos, descriptions,
@@ -110,14 +109,14 @@ const Learn = () => {
           </section>
 
           <section>
-            <h3 className="text-3xl font-bold text-slate-700">
+            <h3 className="text-2xl font-bold text-slate-700">
               4. Contact Sellers or Agents
             </h3>
             <div className="mt-4 text-lg text-slate-700">
               <p>
                 <strong>Inquire About a Property:</strong>
               </p>
-              <ul className="list-disc list-inside mt-2">
+              <ul className="list-disc list-inside mt-2 text-base">
                 <li>Click on a listing to view its details.</li>
                 <li>
                   Use the contact form to reach out to the seller or agent.
@@ -131,14 +130,14 @@ const Learn = () => {
           </section>
 
           <section>
-            <h3 className="text-3xl font-bold text-slate-700">
+            <h3 className="text-2xl font-bold text-slate-700">
               5. List Your Property
             </h3>
             <div className="mt-4 text-lg text-slate-700">
               <p>
                 <strong>Create a Listing:</strong>
               </p>
-              <ul className="list-disc list-inside mt-2">
+              <ul className="list-disc list-inside mt-2 text-base">
                 <li>Go to the "Listings" section after authentication.</li>
                 <li>
                   Fill in the property details, including address, price,
@@ -152,7 +151,7 @@ const Learn = () => {
               <p className="mt-4">
                 <strong>Manage Your Listings:</strong>
               </p>
-              <ul className="list-disc list-inside mt-2">
+              <ul className="list-disc list-inside mt-2 text-base">
                 <li>View and edit your active listings from your dashboard.</li>
                 <li>
                   Track inquiries and manage communications with potential
@@ -163,7 +162,7 @@ const Learn = () => {
           </section>
 
           <section>
-            <h3 className="text-3xl font-bold text-slate-700">
+            <h3 className="text-2xl font-bold text-slate-700">
               6. Get Support
             </h3>
             <Card className="max-w-sm mt-6">
@@ -180,11 +179,11 @@ const Learn = () => {
           </section>
 
           <section>
-            <h3 className="text-3xl font-bold text-slate-700">
+            <h3 className="text-2xl font-bold text-slate-700">
               Tips for Success
             </h3>
             <div className="mt-4 text-lg text-slate-700">
-              <ul className="list-disc list-inside mt-2">
+              <ul className="list-disc list-inside mt-2 text-base">
                 <li className="mb-1">
                   <strong>Regular Updates:</strong> Keep your profile and
                   listings up-to-date to attract more inquiries.

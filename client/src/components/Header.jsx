@@ -117,7 +117,7 @@ const Header = () => {
           active={path === "/learn"}
           as={"div"}
         >
-          <Link to="/learn">Learn More</Link>
+          <Link to="/learn">Getting Started</Link>
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>

@@ -12,6 +12,7 @@ import UpdateListing from "./pages/UpdateListing";
 import Listing from "./pages/Listing";
 import Learn from "./pages/Learn";
 import Search from "./pages/Search";
+import FooterComp from "./components/FooterComp";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/listings" element={<Listings />} />
         </Route>
       </Routes>
+      <FooterComp />
     </BrowserRouter>
   );
 }

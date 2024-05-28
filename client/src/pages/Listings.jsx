@@ -49,7 +49,7 @@ const Listings = () => {
   console.log(listings);
 
   return (
-    <div className="max-w-screen-xl mx-auto p-5">
+    <div className="max-w-screen-xl min-h-[66vh] mx-auto p-5">
       <h1 className="my-5 text-center font-semibold text-3xl">Listings</h1>
 
       {loading && (

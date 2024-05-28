@@ -165,7 +165,7 @@ const CreateListing = () => {
   };
 
   return (
-    <main className="max-w-screen-xl xl:min-h-[89vh] md:pb-10 mx-auto p-5 bg-gray-100 md:m-5 my-5 lg:my-10 rounded">
+    <main className="max-w-screen-xl xl:min-h-[89vh] md:pb-10 mx-auto my-5 p-5 bg-gray-100 lg:my-10 rounded">
       <h1 className="text-center font-semibold text-xl lg:text-3xl my-3 lg:my-7">
         Create a Listing
       </h1>

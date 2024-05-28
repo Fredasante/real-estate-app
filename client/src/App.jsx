@@ -13,10 +13,12 @@ import Listing from "./pages/Listing";
 import Learn from "./pages/Learn";
 import Search from "./pages/Search";
 import FooterComp from "./components/FooterComp";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />

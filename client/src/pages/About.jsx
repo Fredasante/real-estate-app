@@ -2,7 +2,7 @@ import hero from "../assets/about-hero.jpg";
 
 const About = () => {
   return (
-    <div className="max-w-screen-xl min-h-[65vh] mx-auto p-5">
+    <div className="max-w-screen-xl min-h-[65vh] mx-auto p-5 text-slate-700">
       <section className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-10 md:p-5">
         <div>
           <h1 className="text-3xl text-slate-700 font-bold">
@@ -79,7 +79,7 @@ const About = () => {
         <h2 className="text-2xl text-slate-700 font-bold text-center mt-7 mb-3">
           Join Us
         </h2>
-        <p>
+        <p className="lg:mb-10">
           Explore the world of real estate with Property Pro and discover a
           better way to find your perfect property. Whether you are buying,
           selling, or renting, we are here to make your real estate journey

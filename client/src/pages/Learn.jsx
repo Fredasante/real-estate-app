@@ -7,7 +7,7 @@ const Learn = () => {
     <div className="py-16">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center">
-          <p className="mt-2 text-4xl leading-10 font-extrabold tracking-tight text-slate-700 sm:text-4xl">
+          <p className="mt-2 text-3xl leading-10 font-extrabold tracking-tight text-slate-700 sm:text-4xl">
             Welcome to Property Pro
           </p>
           <p className="mt-4 max-w-2xl text-lg text-gray-600 mx-auto">

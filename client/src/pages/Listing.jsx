@@ -122,7 +122,7 @@ const Listing = () => {
                 {listing.furnished ? "Furnished" : "Unfurnished"}
               </li>
             </ul>
-            {currentUser && !contact && listing.userRef === currentUser._id && (
+            {currentUser && !contact && listing.userRef !== currentUser._id && (
               <Button
                 onClick={() => setContact(true)}
                 className="w-full my-7"

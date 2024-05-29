@@ -55,9 +55,9 @@ const Listing = () => {
             </Carousel>
           </div>
           <div className="max-w-screen-lg  mx-auto mt-10">
-            <Card className="max-w-md my-5">
+            <Card className="max-w-[470px] my-5">
               <div className="flex items-baseline justify-between">
-                <h5 className="text-xl font-semibold tracking-tight text-gray-900">
+                <h5 className="text-xl truncate font-semibold tracking-tight text-gray-900">
                   {listing.name}
                 </h5>
                 <div className="flex items-baseline text-gray-900 dark:text-white">
